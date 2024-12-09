@@ -69,6 +69,7 @@ const ReviewForm = ({dataUpdate, keyId, tableName}) => {
             />
 
             <InputField
+                type="text"
                 label="comment"
                 defaultValue={dataUpdate?.comment || ''}
                 {...register('comment')}  // Enregistrement de l'input dans useForm

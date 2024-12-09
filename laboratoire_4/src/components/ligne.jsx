@@ -1,13 +1,12 @@
 import { usePopup } from "../context/PopupContext";
-import Profile from "../models/profile.jsx";
-
+import '../assets/style/tableStyle.css'
 function Ligne({ data, onDelete, ObjectLigne }) {
     if (typeof data !== "object" || data === null) {
         console.error("La prop `data` doit être un objet.");
         return <tr></tr>;
     }
 
-    const { showPopup,hidePopup } = usePopup();
+    const { showPopup, hidePopup } = usePopup();
 
     const values = Object.values(data);
 
@@ -35,23 +34,17 @@ function Ligne({ data, onDelete, ObjectLigne }) {
         );
     };
 
-
-
     return (
         <tr>
             <td>
                 <input
                     type="button"
-                    onClick={() => {
-                        handlePopupDelete()
-                    }}
+                    onClick={handlePopupDelete}
                     value={"Delete"}
                 />
                 <input
                     type="button"
-                    onClick={() => {
-                        handlePopupUpdate(data)
-                    }}
+                    onClick={() => handlePopupUpdate(data)}
                     value={"Update"}
                 />
             </td>

@@ -1,0 +1,148 @@
+/* Conteneur principal de la table */
+.table-container {
+    width: 90%;
+    margin: 20px auto;
+    overflow-x: auto;
+}
+
+/* Style général de la table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* En-têtes de table */
+thead th, thead td {
+    background-color: #495057; /* Gris foncé pour un style sobre */
+    color: #ffffff;
+    text-align: left;
+    padding: 12px;
+    font-weight: bold;
+    border-bottom: 2px solid #dee2e6;
+}
+
+/* Cellules */
+tbody td {
+    padding: 10px 15px;
+    text-align: left;
+    vertical-align: middle;
+    color: #333;
+}
+
+/* Lignes du corps */
+tbody tr {
+    border-bottom: 1px solid #dee2e6;
+    background-color: #f8f9fa; /* Gris clair */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e9ecef; /* Gris légèrement plus foncé */
+}
+
+/* Effet au survol */
+tbody tr:hover {
+    background-color: #ced4da; /* Surbrillance grise */
+    transition: background-color 0.3s ease;
+}
+
+/* Boutons */
+input[type="button"] {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 3px;
+}
+
+/* Bouton Delete */
+input[type="button"][value="Delete"] {
+    background-color: #dc3545; /* Rouge sobre */
+    color: #ffffff;
+}
+
+input[type="button"][value="Delete"]:hover {
+    background-color: #bd2130; /* Rouge plus foncé au survol */
+}
+
+/* Bouton Update */
+input[type="button"][value="Update"] {
+    background-color: #28a745; /* Vert sobre */
+    color: #ffffff;
+}
+
+input[type="button"][value="Update"]:hover {
+    background-color: #218838; /* Vert plus foncé au survol */
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: not-allowed;
+    accent-color: #495057; /* Gris foncé */
+}
+
+/* Boutons de bas de page */
+button {
+    padding: 8px 15px;
+    font-size: 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px 5px;
+    background-color: #6c757d; /* Gris moyen */
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #5a6268; /* Gris plus foncé au survol */
+    transform: scale(1.05);
+}
+
+/* Bouton "+" */
+button:first-of-type {
+    background-color: #28a745; /* Vert sobre */
+}
+
+button:first-of-type:hover {
+    background-color: #218838;
+}
+
+/* Bouton "Refresh" */
+button:last-of-type {
+    background-color: #007bff; /* Bleu sobre */
+}
+
+button:last-of-type:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive : rétrécit les cellules sur petits écrans */
+@media (max-width: 768px) {
+    table {
+        font-size: 13px;
+    }
+
+    td, th {
+        padding: 8px 10px;
+    }
+
+    input[type="button"] {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+
+    button {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+}
