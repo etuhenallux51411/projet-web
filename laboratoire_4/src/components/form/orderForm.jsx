@@ -7,6 +7,7 @@ import {create,update} from "../../data/crud.js";
 import {data} from "react-router-dom";
 import flattenObject from "../../Utils/flattenOject.js";
 import { usePopup } from "../../context/PopupContext";
+import '../../assets/style/formStyle.css'
 
 
 
@@ -49,27 +50,28 @@ const OrderForm = ({dataUpdate}) => {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <InputField
-                type="number"
+                type="text"
                 label="order_id"
                 defaultValue={dataUpdate?.order_id}
                 {...register('order_id')}  // Enregistrement de l'input dans useForm
                 error={errors.order_id?.message}  // Affichage des erreurs
             />
             <InputField
-                type="number"
+                type="text"
                 label="buyer_id"
                 defaultValue={dataUpdate?.buyer_id || ''}
                 {...register('buyer_id')}  // Enregistrement de l'input dans useForm
                 error={errors.buyer_id?.message}  // Affichage des erreurs
             />
             <InputField
-
+                type = "text"
                 label="payment_status"
                 defaultValue={dataUpdate?.payment_status || ''}
                 {...register('payment_status')}  // Enregistrement de l'input dans useForm
                 error={errors.payment_status?.message}  // Affichage des erreurs
             />
             <InputField
+                type="text"
                 label="shipping_status"
                 defaultValue={dataUpdate?.shipping_status}
                 {...register('shipping_status')}  // Enregistrement de l'input dans useForm
@@ -77,7 +79,7 @@ const OrderForm = ({dataUpdate}) => {
             />
 
             <InputField
-                type="date"
+                type="text"
                 label="order_date"
                 defaultValue={
                     dataUpdate?.order_date

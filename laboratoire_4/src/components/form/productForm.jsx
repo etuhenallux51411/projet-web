@@ -56,13 +56,14 @@ const ProductForm = (dataUpdate) => {
                 error={errors.seller_id?.message}  // Affichage des erreurs
             />
             <InputField
-
+                type="text"
                 label="name"
                 defaultValue={dataUpdate?.name || ''}
                 {...register('name')}  // Enregistrement de l'input dans useForm
                 error={errors.name?.message}  // Affichage des erreurs
             />
             <InputField
+                type="text"
                 label="description"
                 defaultValue={dataUpdate?.description}
                 {...register('description')}  // Enregistrement de l'input dans useForm
@@ -70,6 +71,7 @@ const ProductForm = (dataUpdate) => {
             />
 
             <InputField
+                type="text"
                 label="filament_type"
                 defaultValue={dataUpdate?.filament_type || ''}
                 {...register('filament_type')}  // Enregistrement de l'input dans useForm
