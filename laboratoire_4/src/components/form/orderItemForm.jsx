@@ -3,23 +3,15 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import InputField from './InputField';
-import {create, read, update} from "../../data/crud.js";
-import {data} from "react-router-dom";
 import { usePopup } from "../../context/PopupContext";
-import flattenObject from "../../Utils/flattenOject.js";
+import CrudController from "../../controller/crudController.js"
 
 
 const OrderItemForm = ({dataUpdate, keyId, tableName}) => {
 
-    //console.log({dataUpdate, keyId, tableName});
-    //console.log(dataUpdate, keyId, tableName);
-
-
-    //dataUpdate = flattenObject(dataUpdate);
-
-    //console.log("ici" + {dataUpdate, keyId, tableName});
 
     const { hidePopup } = usePopup();
+    const crud = new CrudController(tableName);
 
     const validationSchema = Yup.object().shape({
         quantity: Yup.number().integer("must be entire").required("need it"),
@@ -39,8 +31,7 @@ const OrderItemForm = ({dataUpdate, keyId, tableName}) => {
 
     // Fonction de soumission du formulaire
     const onSubmit = (data) => {
-        console.log(dataUpdate, keyId);
-        (dataUpdate !== undefined) ? update(tableName,(e) => (e[keyId] === dataUpdate[keyId]),data) :create(tableName,data);
+        (dataUpdate !== undefined) ? crud.updateItem((e) => (e[keyId] === dataUpdate[keyId]),data) :crud.createItem(data);
         hidePopup();
     };
 

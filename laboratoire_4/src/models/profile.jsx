@@ -1,6 +1,7 @@
 import ProfileForm from "../components/form/profileForm.jsx";
 
 const keyID ='user_id';
+const tableName ='profile';
 
 class Profile {
     constructor(user_id, name, email, password, address, bank_account, balance) {
@@ -24,7 +25,8 @@ class Profile {
     }
 
     static getForm(dataUpdate) {
-        return <ProfileForm dataUpdate={dataUpdate}/>;
+
+        return <ProfileForm dataUpdate={dataUpdate} tableName={tableName} keyId={keyID}/>;
     }
 }
 

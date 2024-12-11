@@ -3,20 +3,19 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import InputField from './InputField';
-import {create,update} from "../../data/crud.js";
-import {data} from "react-router-dom";
-import flattenObject from "../../Utils/flattenOject.js";
 import { usePopup } from "../../context/PopupContext";
 import '../../assets/style/formStyle.css'
+import CrudController from "../../controller/crudController.js"
 
 
 
-
-const OrderForm = ({dataUpdate}) => {
+const OrderForm = ({dataUpdate, keyId, tableName}) => {
 
     const { hidePopup } = usePopup();
+    const crud = new CrudController(tableName);
 
     const validationSchema = Yup.object().shape({
+        //TODO : voir comment régler la date. Ca fonctionne tres bien grace a type = "date" de limite passé et futur
         //oder_date: Yup.date().required("La date est obligatoire"),
         shipping_status: Yup.string().required('status is required'),
         payment_status: Yup.string().required('status is required'),
@@ -25,7 +24,6 @@ const OrderForm = ({dataUpdate}) => {
 
     });
 
-    console.log("oder_date :", dataUpdate?.order_date);
 
     // Utilisation de useForm avec validation
     const {
@@ -41,8 +39,7 @@ const OrderForm = ({dataUpdate}) => {
         if (data.review_date) {
             data.review_date = new Date(data.review_date).toISOString().split('T')[0];
         }
-        console.log("ici irtiritirtiri" + dataUpdate);
-        (dataUpdate !== undefined) ? update('orders',(e) => (e.order_id === dataUpdate.order_id),data) :create("orders",data);
+        (dataUpdate !== undefined) ? crud.updateItem((e) => (e[keyId] === dataUpdate[keyId]),data) :crud.createItem(data);
 
         hidePopup();
     };

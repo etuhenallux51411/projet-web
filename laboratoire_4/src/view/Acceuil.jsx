@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import LoginForm from "../components/loginForm.jsx";
+import LoginForm from "../components/form/loginForm.jsx";
 import { usePopup } from "../context/PopupContext.jsx";
 import "../assets/style/acceuilStyle.css"
 import logo from "../assets/logo.png";

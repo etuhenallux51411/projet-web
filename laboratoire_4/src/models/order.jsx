@@ -1,6 +1,7 @@
 import OrderForm from "../components/form/orderForm.jsx";
 
 const keyID ='order_id';
+const tableName = 'orders';
 
 class Order {
     constructor(order_id, buyer_id, payment_status, shipping_status, order_date) {
@@ -22,7 +23,7 @@ class Order {
     }
 
     static getForm(dataUpdate) {
-        return <OrderForm dataUpdate={dataUpdate}/>;
+        return <OrderForm dataUpdate={dataUpdate} keyId={keyID} tableName={tableName} />;
     }
 
 }
