@@ -3,13 +3,14 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import InputField from './InputField';
-import { create, update } from "../../data/crud.js";
 import { usePopup } from "../../context/PopupContext";
 import '../../assets/style/formStyle.css'
+import CrudController from "../../controller/crudController.js"
 
 
 const ProfileForm = ({dataUpdate, keyId, tableName}) => {
     const { hidePopup } = usePopup();
+    const crud = new CrudController(tableName);
 
     const validationSchema = Yup.object().shape({
         balance: Yup.number().integer("Must be an integer").nullable()
@@ -34,7 +35,7 @@ const ProfileForm = ({dataUpdate, keyId, tableName}) => {
     });
 
     const onSubmit = (data) => {
-        (dataUpdate !== undefined) ? update(tableName,(e) => (e[keyId] === dataUpdate[keyId]),data) :create(tableName,data);
+        (dataUpdate !== undefined) ? crud.updateItem((e) => (e[keyId] === dataUpdate[keyId]),data) :crud.createItem(data);
         hidePopup();
     };
 

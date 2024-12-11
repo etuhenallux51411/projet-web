@@ -1,12 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Ligne from "./ligne.jsx";
-import { read, remove, create} from "../data/crud.js";
-import Profile from "../models/profile.jsx";
-import tableToJson from "../controler/tableToJson.js";
+import CrudController from "../controller/crudController.js"
 import {usePopup} from "../context/PopupContext.jsx";
 
-import UserForm from "./userForm.jsx";
+
 
 // Fonctions utilitaires pour extraire les clés et types dynamiquement
 const extrudeType = (dataLigne) => {
@@ -24,15 +22,15 @@ const extrudeName = (dataLigne) => {
 };
 
 
-function AutoTable({ObjectLigne,tableName, profileForm }) {
-    console.log("test ici" + tableName);
+function AutoTable({ObjectLigne,tableName}) {
+
     if (!tableName) {
-        console.log("test ici" + tableName);
         tableName = useParams();
-        console.log("test ici" + tableName);
     }
+    const crud = new CrudController(tableName);
+
     const [data, setData] = useState([]);
-    const { showPopup,hidePopup } = usePopup();
+    const { showPopup } = usePopup();
 
     const handleCreate = () => {
         showPopup(
@@ -43,33 +41,24 @@ function AutoTable({ObjectLigne,tableName, profileForm }) {
         );
     }
 
-    const handleRead = () => {setData(read(tableName))}
+    const handleRead = () => {setData(crud.readItems().data)}
 
 
     const handleDelete = (id) => {
-        console.log("handleDelete ==" + id);
-        remove(tableName, (item) => item[ObjectLigne.getKeyId()]=== id);
+        crud.deleteItem((item) => item[ObjectLigne.getKeyId()]=== id);
+        //remove(tableName, (item) => item[ObjectLigne.getKeyId()]=== id);
         setData((prevData) => prevData.filter((row) => row[ObjectLigne.getKeyId()] !== id));
     };
 
-
+    //hhmmmmmm
     useEffect(() => {
-        const fetchedData = read(tableName); // Lecture des données pour la table dynamique
-        if (Array.isArray(fetchedData)) {
-            setData(fetchedData);
-        } else {
-            console.error("Expected data to be an array.");
-        }
+        handleRead();
     }, [tableName]);
-
-
 
 
     if (data.length === 0) {
         return <p>Aucune donnée disponible pour la table : {tableName}</p>;
     }
-
-
 
     const keys = ObjectLigne ? ObjectLigne.getKeys(): extrudeName(data[0] || {});
     const types = extrudeType(data[0] || {});

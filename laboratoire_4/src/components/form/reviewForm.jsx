@@ -3,16 +3,15 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import InputField from './InputField';
-import {create, update} from "../../data/crud.js";
-
 import { usePopup } from "../../context/PopupContext";
-
+import CrudController from "../../controller/crudController.js"
 
 
 const ReviewForm = ({dataUpdate, keyId, tableName}) => {
 
 
     const { hidePopup } = usePopup();
+    const crud = new CrudController(tableName);
 
     const validationSchema = Yup.object().shape({
         review_date: Yup.date().required("La date est obligatoire"),
@@ -40,7 +39,7 @@ const ReviewForm = ({dataUpdate, keyId, tableName}) => {
         if (data.review_date) {
             data.review_date = new Date(data.review_date).toISOString().split('T')[0];
         }
-        (dataUpdate !== undefined) ? update(tableName,(e) => (e[keyId] === dataUpdate[keyId]),data) :create(tableName,data);
+        (dataUpdate !== undefined) ? crud.updateItem((e) => (e[keyId] === dataUpdate[keyId]),data) :crud.createItem(data);
         hidePopup();
     };
 

@@ -3,15 +3,16 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import InputField from './InputField';
-import {create,update} from "../../data/crud.js";
-import { usePopup } from "../../context/PopupContext";
 
+import { usePopup } from "../../context/PopupContext";
+import CrudController from "../../controller/crudController.js"
 
 
 
 const ProductForm = ({dataUpdate, keyId, tableName}) => {
 
     const { hidePopup } = usePopup();
+    const crud = new CrudController(tableName);
 
     const validationSchema = Yup.object().shape({
         filament_type: Yup.string().required('Name is required').min(3, 'Name must be at least 3 characters'),
@@ -35,7 +36,7 @@ const ProductForm = ({dataUpdate, keyId, tableName}) => {
     // Fonction de soumission du formulaire
     const onSubmit = (data) => {
 
-        (dataUpdate !== undefined) ? update(tableName,(e) => (e[keyId] === dataUpdate[keyId]),data) :create(tableName,data);
+        (dataUpdate !== undefined) ? crud.updateItem((e) => (e[keyId] === dataUpdate[keyId]),data) :crud.createItem(data);
 
         hidePopup();
     };

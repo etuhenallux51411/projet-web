@@ -25,6 +25,7 @@ class Profile {
     }
 
     static getForm(dataUpdate) {
+
         return <ProfileForm dataUpdate={dataUpdate} tableName={tableName} keyId={keyID}/>;
     }
 }
