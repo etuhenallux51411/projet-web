@@ -22,7 +22,6 @@ class OrderItem {
     }
 
     static getForm(dataUpdate) {
-        console.log(keyID, tableName + "apapapapappapapapapp");
         return <OrderItemForm dataUpdate={dataUpdate} tableName={tableName} keyId={keyID}/>;
     }
 }

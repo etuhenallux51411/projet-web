@@ -1,6 +1,7 @@
 import ProductForm from "../components/form/productForm.jsx";
 
 const keyID = 'product_id';
+const tableName = 'product';
 
 class Product {
     constructor(product_id, seller_id, name, description, price, filament_type) {
@@ -24,7 +25,7 @@ class Product {
 
     static getForm(dataUpdate) {
         console.log("bonjour ici product.jsx voici dataupdate:" +dataUpdate);
-        return <ProductForm dataUpdate={dataUpdate}/>;
+        return <ProductForm dataUpdate={dataUpdate} tableName={tableName} keyId={keyID}/>;
     }
 }
 

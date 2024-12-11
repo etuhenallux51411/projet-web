@@ -5,11 +5,10 @@ import * as Yup from 'yup';
 import InputField from './InputField';
 import { create, update } from "../../data/crud.js";
 import { usePopup } from "../../context/PopupContext";
-import flattenObject from "../../Utils/flattenOject.js";
 import '../../assets/style/formStyle.css'
 
-const ProfileForm = (dataUpdate) => {
-    dataUpdate = flattenObject(dataUpdate);
+
+const ProfileForm = ({dataUpdate, keyId, tableName}) => {
     const { hidePopup } = usePopup();
 
     const validationSchema = Yup.object().shape({
@@ -35,9 +34,7 @@ const ProfileForm = (dataUpdate) => {
     });
 
     const onSubmit = (data) => {
-        dataUpdate.user_id !== undefined
-            ? update('profile', (e) => (e.user_id === dataUpdate.user_id), data)
-            : create("profile", data);
+        (dataUpdate !== undefined) ? update(tableName,(e) => (e[keyId] === dataUpdate[keyId]),data) :create(tableName,data);
         hidePopup();
     };
 
@@ -52,7 +49,7 @@ const ProfileForm = (dataUpdate) => {
             <InputField type="text" label="password" defaultValue={dataUpdate?.password} {...register('password')} error={errors.password?.message} />
             <InputField type="text" label="address" defaultValue={dataUpdate?.address || ''} {...register('address')} error={errors.address?.message} />
             <InputField type="text" label="bank_account" defaultValue={dataUpdate?.bank_account || ''} {...register('bank_account')} error={errors.bank_account?.message} />
-            <InputField type="text" label="balance" defaultValue={dataUpdate?.balance || "0.0"} {...register('balance')} error={errors.balance?.message} />
+            <InputField type="number" label="balance" defaultValue={dataUpdate?.balance || null} {...register('balance')} error={errors.balance?.message} />
             <button type="submit">Submit</button>
         </form>
     );

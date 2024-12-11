@@ -37,7 +37,7 @@ function AutoTable({ObjectLigne,tableName, profileForm }) {
     const handleCreate = () => {
         showPopup(
             <div>
-                add is nice
+                <h2>New ligne for &#39;{tableName}&#39;</h2>
                 {ObjectLigne.getForm()}
             </div>
         );
@@ -62,7 +62,7 @@ function AutoTable({ObjectLigne,tableName, profileForm }) {
         }
     }, [tableName]);
 
-    // Suppression d'une ligne par ID
+
 
 
     if (data.length === 0) {
