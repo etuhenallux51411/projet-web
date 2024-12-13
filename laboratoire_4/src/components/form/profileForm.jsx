@@ -11,7 +11,7 @@ import CrudController from "../../controller/crudController.js"
 const ProfileForm = ({dataUpdate, keyId, tableName}) => {
     const { hidePopup } = usePopup();
     const crud = new CrudController(tableName);
-
+    const idExist = dataUpdate?.user_id !== undefined;
     const validationSchema = Yup.object().shape({
         balance: Yup.number().integer("Must be an integer").nullable()
             .transform((value, originalValue) => (originalValue === "" ? null : value))
@@ -41,12 +41,18 @@ const ProfileForm = ({dataUpdate, keyId, tableName}) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-                <label>user_id</label>
-                <p className="readonly-field">{dataUpdate?.user_id || "Not available"}</p>
-            </div>
+            {
+                (idExist === true) && <InputField
+                    type="number"
+                    label="user_id"
+                    defaultValue={dataUpdate?.user_id || ''}
+                    readOnly={true}
+                    error={errors.user_id?.message}
+                />
+
+            }
             <InputField type="text" label="Name" defaultValue={dataUpdate?.name || ''} {...register('name')} error={errors.name?.message} />
-            <InputField type="text" label="Email" defaultValue={dataUpdate?.email || ''} {...register('email')} error={errors.email?.message} />
+            <InputField type="email" label="Email" defaultValue={dataUpdate?.email || ''} {...register('email')} error={errors.email?.message} />
             <InputField type="text" label="password" defaultValue={dataUpdate?.password} {...register('password')} error={errors.password?.message} />
             <InputField type="text" label="address" defaultValue={dataUpdate?.address || ''} {...register('address')} error={errors.address?.message} />
             <InputField type="text" label="bank_account" defaultValue={dataUpdate?.bank_account || ''} {...register('bank_account')} error={errors.bank_account?.message} />

@@ -1,10 +1,15 @@
 import React, { forwardRef } from 'react';
 
-const InputField = forwardRef(({ label, error, ...props }, ref) => {
+const InputField = forwardRef(({ label, error, readOnly, ...props }, ref) => {
     return (
         <div>
             {label && <label htmlFor={props.name}>{label}</label>}
-            <input ref={ref} {...props} />
+            <input
+                ref={ref}
+                {...props}
+                readOnly={readOnly}
+                style={{ backgroundColor: readOnly ? '#f0f0f0' : 'white' }}
+            />
             {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>
     );

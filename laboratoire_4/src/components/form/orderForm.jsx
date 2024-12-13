@@ -76,7 +76,7 @@ const OrderForm = ({dataUpdate, keyId, tableName}) => {
             />
 
             <InputField
-                type="text"
+                type="date"
                 label="order_date"
                 defaultValue={
                     dataUpdate?.order_date
