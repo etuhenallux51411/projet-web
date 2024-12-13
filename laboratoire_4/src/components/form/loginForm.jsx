@@ -6,9 +6,6 @@ import InputField from './InputField';
 import { usePopup } from "../../context/PopupContext";
 import '../../assets/style/formStyle.css'
 
-
-
-
 const LoginForm = () => {
 
     const { hidePopup } = usePopup();

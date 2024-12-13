@@ -13,7 +13,6 @@ const ProductForm = ({dataUpdate, keyId, tableName}) => {
 
     const { hidePopup } = usePopup();
     const crud = new CrudController(tableName);
-
     const validationSchema = Yup.object().shape({
         filament_type: Yup.string().required('Name is required').min(3, 'Name must be at least 3 characters'),
         price: Yup.number().positive().required('Balance is required'),
@@ -42,33 +41,35 @@ const ProductForm = ({dataUpdate, keyId, tableName}) => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
             <InputField
                 type="number"
-                label="ID"
-                defaultValue={dataUpdate?.product_id}
-                {...register('product_id')}  // Enregistrement de l'input dans useForm
-                error={errors.product_id?.message}  // Affichage des erreurs
+                label="product_id"
+                defaultValue={dataUpdate?.product_id || ''}
+                readOnly
+                {...register('product_id')}
+                error={errors.product_id?.message}
             />
+
             <InputField
                 type="number"
                 label="seller_id"
                 defaultValue={dataUpdate?.seller_id || ''}
-                {...register('seller_id')}  // Enregistrement de l'input dans useForm
+                {...register('seller_id')} // Enregistrement de l'input dans useForm
                 error={errors.seller_id?.message}  // Affichage des erreurs
             />
             <InputField
                 type="text"
                 label="name"
                 defaultValue={dataUpdate?.name || ''}
-                {...register('name')}  // Enregistrement de l'input dans useForm
+                {...register('name')} // Enregistrement de l'input dans useForm
                 error={errors.name?.message}  // Affichage des erreurs
             />
             <InputField
                 type="text"
                 label="description"
                 defaultValue={dataUpdate?.description}
-                {...register('description')}  // Enregistrement de l'input dans useForm
+                {...register('description')} // Enregistrement de l'input dans useForm
                 error={errors.description?.message}  // Affichage des erreurs
             />
 
@@ -76,7 +77,7 @@ const ProductForm = ({dataUpdate, keyId, tableName}) => {
                 type="text"
                 label="filament_type"
                 defaultValue={dataUpdate?.filament_type || ''}
-                {...register('filament_type')}  // Enregistrement de l'input dans useForm
+                {...register('filament_type')} // Enregistrement de l'input dans useForm
                 error={errors.filament_type?.message}  // Affichage des erreurs
             />
 
@@ -84,10 +85,9 @@ const ProductForm = ({dataUpdate, keyId, tableName}) => {
                 type="number"
                 label="price"
                 defaultValue={dataUpdate?.price || "0.0"}
-                {...register('price')}  // Enregistrement de l'input dans useForm
+                {...register('price')} // Enregistrement de l'input dans useForm
                 error={errors.price?.message}  // Affichage des erreurs
             />
-
 
 
             <button type="submit">Submit</button>

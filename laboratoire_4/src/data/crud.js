@@ -129,43 +129,43 @@ let combinedData = {
         },
         {
             "product_id": 4,
+            "seller_id": 1,
             "name": "3D Printer - Model A",
             "description": "High-quality 3D printer suitable for industrial use.",
             "price": 1200.00,
             "filament_type": "PLA",
-            "seller_id": 1
         },
         {
             "product_id": 5,
+            "seller_id": 2,
             "name": "3D Printer - Model B",
             "description": "Compact 3D printer for home use.",
             "price": 600.00,
             "filament_type": "ABS",
-            "seller_id": 2
         },
         {
             "product_id": 6,
+            "seller_id": 3,
             "name": "Filament PLA 1.75mm - Black",
             "description": "Premium quality filament for precision printing.",
             "price": 25.50,
             "filament_type": "PLA",
-            "seller_id": 3
         },
         {
             "product_id": 7,
+            "seller_id": 2,
             "name": "Filament ABS 1.75mm - White",
             "description": "Durable ABS filament for complex designs.",
             "price": 30.00,
             "filament_type": "ABS",
-            "seller_id": 2
         },
         {
             "product_id": 8,
+            "seller_id": 1,
             "name": "3D Printer - Model C",
             "description": "High-speed 3D printer with advanced features.",
             "price": 1500.00,
             "filament_type": "PETG",
-            "seller_id": 1
         }
     ],
     "order_items": [
